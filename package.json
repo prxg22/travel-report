@@ -1,0 +1,9 @@
+{
+  "name": "travel-report",
+  "version": "1.0.2",
+  "description": "airline tickets reports firebase helper",
+  "main": "index.js",
+  "author": "prxg22",
+  "license": "MIT",
+  "private": false
+}
