@@ -1,4 +1,5 @@
 # travel-report
+![img](https://img.shields.io/github/package-json/v/prxg22/travel-report/master.svg?label=version&style=plastic)
 
 [Firebase](https://firebase.google.com) RTD's helper to manage travels and it's tickets reports
 
