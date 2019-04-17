@@ -5,12 +5,10 @@ const reference = require('firebase-reference-helper')
 module.exports = (admin, { ref, params } = {}) => {
     if (!admin) throw Error('No admin provided!')
 
-    const travelRef = ref && reference(ref, params) || ''
-    const reportRef = reference(travelRef && travelRef.ref() + '/travels/{travel_id}',
-      { ...params, travel_id: '' })
+    const rootRef = ref && reference(ref, params) || ''
 
     return {
-      Travel: travel(admin, travelRef),
-      Report: report(admin, reportRef),
+      Travel: travel(admin, rootRef),
+      Report: report(admin, rootRef),
     }
 }
