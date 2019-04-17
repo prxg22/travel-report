@@ -13,4 +13,4 @@ module.exports = (admin, { ref, params } = {}) => {
       Travel: travel(admin, travelRef),
       Report: report(admin, reportRef),
     }
-)
+}
