@@ -1,9 +1,21 @@
 {
   "name": "travel-report",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "airline tickets reports firebase helper",
   "main": "index.js",
   "author": "prxg22",
   "license": "MIT",
-  "private": false
+  "private": false,
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "jest": "^24.7.1"
+  },
+  "scripts": {
+    "test": "jest **/*.spec.js",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "firebase-admin-mock": "^0.0.10",
+    "firebase-reference-helper": "^0.0.1"
+  }
 }
