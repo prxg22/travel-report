@@ -66,4 +66,4 @@ workflows:
               tags:
                 only: /.*/
               branches:
-                ignore: /(?!master).*/
+                only: /master/ 
