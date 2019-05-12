@@ -32,6 +32,8 @@ jobs:
   test:
     <<: *defaults
     steps:
+      - attach_workspace:
+          at: ~/repo
       - run:
           name: Run tests
           command: yarn test
