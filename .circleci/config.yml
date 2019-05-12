@@ -97,6 +97,10 @@ workflows:
               only: /master/
   deploy:
     jobs:
+      - config:
+          filters:
+            tags:
+              only: /.*/
       - deploy:
           requires:
             - config
