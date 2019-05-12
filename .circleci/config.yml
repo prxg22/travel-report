@@ -53,17 +53,12 @@ workflows:
 
   _deploy:
     jobs:
-      - test:
-        filters:
-          tags:
-            only: /.*/
-          branches:
-            ignore: /.*/
+      - test
       - deploy:
           requires:
             - test
-            filters:
-              tags:
-                only: /.*/
-              branches:
-                only: /master/ 
+          filters:
+            tags:
+              only: /.*/
+            branches:
+              only: /master/
