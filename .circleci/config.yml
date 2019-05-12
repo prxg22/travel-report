@@ -33,32 +33,45 @@ jobs:
           root: ~/repo
           paths: .
 
+  bump:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - run:
+          name: Config version bump
+          command: yarn config set version-git-tag true
+
   deploy:
     <<: *defaults
     steps:
       - attach_workspace:
           at: ~/repo
       - run:
-          name: Authenticate with registry
-          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/repo/.npmrc
-      - run:
           name: Publish package
           command: npm publish
+      - run:
+          name: Authenticate with registry
+          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/repo/.npmrc
 
 workflows:
   version: 2
-  _test:
+  test:
     jobs:
       - test
 
-  _deploy:
+  bump:
     jobs:
       - test
-      - deploy:
+      - bump:
           requires:
             - test
           filters:
-            tags:
-              only: /.*/
             branches:
               only: /master/
+  deploy:
+    jobs:
+      - deploy:
+          filters:
+            tags:
+              only: /.*/
