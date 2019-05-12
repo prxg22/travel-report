@@ -6,7 +6,7 @@ defaults: &defaults
     - image: circleci/node:latest
 
 jobs:
-  test:
+  config:
     <<: *defaults
     steps:
       - checkout
@@ -20,10 +20,6 @@ jobs:
           name: Install dependencies
           command: yarn
 
-      - run:
-          name: Run tests
-          command: yarn test
-
       - save_cache:
           paths:
             - node_modules
@@ -33,6 +29,13 @@ jobs:
           root: ~/repo
           paths: .
 
+  test:
+    <<: *defaults
+    steps:
+      - run:
+          name: Run tests
+          command: yarn test
+
   bump:
     <<: *defaults
     steps:
@@ -41,6 +44,9 @@ jobs:
       - run:
           name: Config version bump
           command: yarn config set version-git-tag true
+      - run:
+          name: Bump version
+          command: yarn version patch
 
   deploy:
     <<: *defaults
@@ -58,11 +64,17 @@ workflows:
   version: 2
   test:
     jobs:
-      - test
+      - config
+      - test:
+          requires:
+            - config
 
   bump:
     jobs:
-      - test
+      - config
+      - test:
+          requires:
+            - config
       - bump:
           requires:
             - test
@@ -71,7 +83,10 @@ workflows:
               only: /master/
   deploy:
     jobs:
+      - config
       - deploy:
+          requires:
+            - config
           filters:
             tags:
               only: /.*/
