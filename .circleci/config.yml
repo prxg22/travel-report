@@ -74,11 +74,11 @@ workflows:
   bump:
     jobs:
       - config:
-        filters:
-          tags:
-            ignore: /.*/
-          branches:
-            only: /master/
+          filters:
+            tags:
+              ignore: /.*/
+            branches:
+              only: /master/
       - test:
           requires:
             - config
