@@ -6,7 +6,7 @@ module.exports = (admin, { ref = '', params = {} }) => {
     if (!admin) throw Error('No admin provided!')
 
     const travelRef = ref && reference(ref, params) || ''
-    const aux = (ref || '') + '/travles/{travel_id}'
+    const aux = (ref || '') + '/travels/{travel_id}'
     const reportRef = reference(aux, { ...params, travel_id: '' })
 
     return {
